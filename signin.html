@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Hardioscope</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Sign In</h1>
+        <p>Access Your Cosmic Journey</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="horoscope.html">Daily Horoscope</a></li>
+                <li><a href="zodiac.html">Zodiac Signs</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="signin.html">Sign-in</a></li>
+            </ul>
+            <div class="nav-profile">
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="first">
+            <div>
+                <div class="heading">Welcome Back</div>
+                <div class="desc">
+                    Sign in to access your personalized horoscopes, birth chart readings, and exclusive astrological content.
+                </div>
+            </div>
+        </section>
+
+        <section class="first">
+            <div>
+                <div class="heading">Sign In Form</div>
+                <form class="signin-form" id="signinForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember" id="remember">
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="button-learn">Sign In</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="first">
+            <div>
+                <div class="heading">New to Astroscope?</div>
+                <div class="desc">
+                    Create an account to unlock all features and get personalized astrological guidance.
+                </div>
+                <button class="button-learn" onclick="showSignupForm()">Create Account</button>
+            </div>
+        </section>
+
+        <!-- Sign Up Form (Hidden by default) -->
+        <section class="first" id="signupSection" style="display: none;">
+            <div>
+                <div class="heading">Create Your Account</div>
+                <form class="signin-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate">Birth Date</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
+                    </div>
+                    <button type="submit" class="button-learn">Create Account</button>
+                    <button type="button" class="button-learn" onclick="hideSignupForm()">Back to Sign In</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Celestial Insights. All rights reserved.</p>
+            <p>
+                <a href="privacy.html" style="color: white; text-decoration: none">Privacy Policy</a>
+                |
+                <a href="terms.html" style="color: white; text-decoration: none">Terms of Service</a>
+                |
+                <a href="contact.html" style="color: white; text-decoration: none">Contact Us</a>
+                |
+                <a href="about.html" style="color: white; text-decoration: none">About Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is already logged in
+        window.onload = function() {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                window.location.href = 'profile.html';
+            }
+        };
+
+        // Handle sign in form submission
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Store user data in session
+                const userData = {
+                    name: user.name,
+                    email: user.email,
+                    birthDate: user.birthDate,
+                    zodiacSign: user.zodiacSign
+                };
+
+                if (remember) {
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                } else {
+                    sessionStorage.setItem('userData', JSON.stringify(userData));
+                }
+
+                window.location.href = 'profile.html';
+            } else {
+                alert('Invalid email or password');
+            }
+        });
+
+        // Handle sign up form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const birthDate = document.getElementById('birthDate').value;
+
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            // Check if email already exists
+            if (users.some(u => u.email === email)) {
+                alert('Email already registered');
+                return;
+            }
+
+            // Calculate zodiac sign based on birth date
+            const zodiacSign = calculateZodiacSign(new Date(birthDate));
+
+            // Create new user
+            const newUser = {
+                name,
+                email,
+                password,
+                birthDate,
+                zodiacSign
+            };
+
+            // Add user to users array
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Store user data in session
+            const userData = {
+                name,
+                email,
+                birthDate,
+                zodiacSign
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            window.location.href = 'profile.html';
+        });
+
+        // Calculate zodiac sign based on birth date
+        function calculateZodiacSign(birthDate) {
+            const month = birthDate.getMonth() + 1;
+            const day = birthDate.getDate();
+
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
+            if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'Taurus';
+            if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'Gemini';
+            if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'Cancer';
+            if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'Leo';
+            if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'Virgo';
+            if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'Libra';
+            if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
+            if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
+            if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return 'Capricorn';
+            if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
+            return 'Pisces';
+        }
+
+        // Show/hide signup form
+        function showSignupForm() {
+            document.getElementById('signupSection').style.display = 'block';
+        }
+
+        function hideSignupForm() {
+            document.getElementById('signupSection').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

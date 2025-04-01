@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Horoscope - Hardioscope</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Daily Horoscope</h1>
+        <p>Your Daily Cosmic Guidance</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="horoscope.html">Daily Horoscope</a></li>
+                <li><a href="zodiac.html">Zodiac Signs</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="signin.html">Sign-in</a></li>
+            </ul>
+            <div class="nav-profile">
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="first">
+            <div>
+                <div class="heading">Select Your Zodiac Sign</div>
+                <div class="desc">
+                    Choose your zodiac sign to receive your personalized daily horoscope reading.
+                </div>
+            </div>
+        </section>
+
+        <div class="zodiac-selector">
+            <div class="zodiac-option" data-sign="aries">
+                <h3>Aries</h3>
+                <p>March 21 - April 19</p>
+                <div class="zodiac-symbol">♈︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="taurus">
+                <h3>Taurus</h3>
+                <p>April 20 - May 20</p>
+                <div class="zodiac-symbol">♉︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="gemini">
+                <h3>Gemini</h3>
+                <p>May 21 - June 20</p>
+                <div class="zodiac-symbol">♊︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="cancer">
+                <h3>Cancer</h3>
+                <p>June 21 - July 22</p>
+                <div class="zodiac-symbol">♋︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="leo">
+                <h3>Leo</h3>
+                <p>July 23 - August 22</p>
+                <div class="zodiac-symbol">♌︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="virgo">
+                <h3>Virgo</h3>
+                <p>August 23 - September 22</p>
+                <div class="zodiac-symbol">♍︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="libra">
+                <h3>Libra</h3>
+                <p>September 23 - October 22</p>
+                <div class="zodiac-symbol">♎︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="scorpio">
+                <h3>Scorpio</h3>
+                <p>October 23 - November 21</p>
+                <div class="zodiac-symbol">♏︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="sagittarius">
+                <h3>Sagittarius</h3>
+                <p>November 22 - December 21</p>
+                <div class="zodiac-symbol">♐︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="capricorn">
+                <h3>Capricorn</h3>
+                <p>December 22 - January 19</p>
+                <div class="zodiac-symbol">♑︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="aquarius">
+                <h3>Aquarius</h3>
+                <p>January 20 - February 18</p>
+                <div class="zodiac-symbol">♒︎</div>
+            </div>
+            <div class="zodiac-option" data-sign="pisces">
+                <h3>Pisces</h3>
+                <p>February 19 - March 20</p>
+                <div class="zodiac-symbol">♓︎</div>
+            </div>
+        </div>
+
+        <section class="horoscope-reading" style="display: none;">
+            <div>
+                <div class="heading">Your Daily Horoscope</div>
+                <div class="horoscope-date"></div>
+                <div class="horoscope-content">
+                    <div class="horoscope-category">
+                        <h3>General</h3>
+                        <p class="general-reading"></p>
+                    </div>
+                    <div class="horoscope-category">
+                        <h3>Love</h3>
+                        <p class="love-reading"></p>
+                    </div>
+                    <div class="horoscope-category">
+                        <h3>Career</h3>
+                        <p class="career-reading"></p>
+                    </div>
+                    <div class="horoscope-category">
+                        <h3>Health</h3>
+                        <p class="health-reading"></p>
+                    </div>
+                    <div class="horoscope-category">
+                        <h3>Lucky Numbers</h3>
+                        <p class="lucky-numbers"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Celestial Insights. All rights reserved.</p>
+            <p>
+                <a href="privacy.html" style="color: white; text-decoration: none">Privacy Policy</a>
+                |
+                <a href="terms.html" style="color: white; text-decoration: none">Terms of Service</a>
+                |
+                <a href="contact.html" style="color: white; text-decoration: none">Contact Us</a>
+                |
+                <a href="about.html" style="color: white; text-decoration: none">About Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Horoscope data
+        const horoscopes = {
+            aries: {
+                general: "Today brings exciting opportunities for growth and development. Trust your instincts and take calculated risks.",
+                love: "Your charisma is at an all-time high. Express your feelings openly and honestly.",
+                career: "A new project or opportunity may present itself. Be ready to showcase your leadership skills.",
+                health: "Focus on maintaining a balanced diet and regular exercise routine.",
+                luckyNumbers: "3, 7, 12, 21, 28"
+            },
+            taurus: {
+                general: "Focus on stability and maintaining your current course. Avoid unnecessary changes today.",
+                love: "Your relationships are in a stable phase. Show appreciation to your loved ones.",
+                career: "Your hard work is being recognized. Stay focused on your goals.",
+                health: "Take time for relaxation and stress management.",
+                luckyNumbers: "2, 6, 11, 15, 24"
+            },
+            gemini: {
+                general: "Your communication skills are heightened today. Share your ideas and connect with others.",
+                love: "Express your feelings clearly to avoid misunderstandings.",
+                career: "A great day for networking and collaboration.",
+                health: "Stay mentally active and engaged.",
+                luckyNumbers: "5, 9, 14, 23, 32"
+            },
+            cancer: {
+                general: "Trust your intuition today. Your emotional intelligence is particularly strong.",
+                love: "Focus on nurturing your relationships and showing care to loved ones.",
+                career: "Your creative ideas are well-received. Trust your instincts.",
+                health: "Pay attention to your emotional well-being.",
+                luckyNumbers: "4, 8, 13, 22, 31"
+            },
+            leo: {
+                general: "Your natural leadership abilities shine today. Take initiative in group situations.",
+                love: "Your charm is irresistible. Be generous with compliments.",
+                career: "A perfect day for presentations and public speaking.",
+                health: "Stay active and maintain your energy levels.",
+                luckyNumbers: "1, 10, 19, 28, 37"
+            },
+            virgo: {
+                general: "Focus on organization and attention to detail. Your analytical skills are sharp.",
+                love: "Be patient and understanding in relationships.",
+                career: "Your efficiency is at its peak. Tackle complex tasks.",
+                health: "Maintain a balanced routine.",
+                luckyNumbers: "6, 15, 24, 33, 42"
+            },
+            libra: {
+                general: "Seek balance in all areas of life. Your diplomatic skills are needed.",
+                love: "Focus on harmony and compromise in relationships.",
+                career: "Your ability to mediate is valuable today.",
+                health: "Find balance between activity and rest.",
+                luckyNumbers: "7, 16, 25, 34, 43"
+            },
+            scorpio: {
+                general: "Your intuition is particularly strong. Trust your instincts.",
+                love: "Deep emotional connections are possible today.",
+                career: "Your determination leads to success.",
+                health: "Focus on emotional well-being.",
+                luckyNumbers: "8, 17, 26, 35, 44"
+            },
+            sagittarius: {
+                general: "Adventure and new experiences await. Stay optimistic.",
+                love: "Be open to new connections and experiences.",
+                career: "Your enthusiasm is contagious. Share your ideas.",
+                health: "Stay active and adventurous.",
+                luckyNumbers: "9, 18, 27, 36, 45"
+            },
+            capricorn: {
+                general: "Focus on practical matters and long-term goals.",
+                love: "Build stable foundations in relationships.",
+                career: "Your dedication leads to recognition.",
+                health: "Maintain a disciplined approach to wellness.",
+                luckyNumbers: "4, 13, 22, 31, 40"
+            },
+            aquarius: {
+                general: "Your innovative ideas are well-received. Think outside the box.",
+                love: "Be open to unconventional approaches in relationships.",
+                career: "Your unique perspective is valuable today.",
+                health: "Try new wellness approaches.",
+                luckyNumbers: "11, 20, 29, 38, 47"
+            },
+            pisces: {
+                general: "Your creativity and intuition are heightened. Trust your inner voice.",
+                love: "Express your feelings through creative means.",
+                career: "Your artistic abilities shine today.",
+                health: "Focus on spiritual and emotional well-being.",
+                luckyNumbers: "12, 21, 30, 39, 48"
+            }
+        };
+
+        // Get current date
+        function getCurrentDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date().toLocaleDateString('en-US', options);
+        }
+
+        // Update horoscope display
+        function updateHoroscope(sign) {
+            const reading = horoscopes[sign];
+            if (reading) {
+                document.querySelector('.horoscope-reading').style.display = 'block';
+                document.querySelector('.horoscope-date').textContent = getCurrentDate();
+                document.querySelector('.general-reading').textContent = reading.general;
+                document.querySelector('.love-reading').textContent = reading.love;
+                document.querySelector('.career-reading').textContent = reading.career;
+                document.querySelector('.health-reading').textContent = reading.health;
+                document.querySelector('.lucky-numbers').textContent = reading.luckyNumbers;
+                
+                // Save the selected sign as preference
+                localStorage.setItem('preferredZodiacSign', sign);
+                
+                // Update selected state of zodiac options
+                document.querySelectorAll('.zodiac-option').forEach(option => {
+                    option.classList.remove('selected');
+                    if (option.getAttribute('data-sign') === sign) {
+                        option.classList.add('selected');
+                    }
+                });
+            }
+        }
+
+        // Add click event listeners to zodiac options
+        document.querySelectorAll('.zodiac-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const sign = option.getAttribute('data-sign');
+                updateHoroscope(sign);
+            });
+        });
+
+        // Check for saved zodiac sign preference
+        const savedSign = localStorage.getItem('preferredZodiacSign');
+        if (savedSign) {
+            updateHoroscope(savedSign);
+        }
+
+        // Update horoscopes daily at midnight
+        function checkDailyUpdate() {
+            const lastUpdate = localStorage.getItem('lastHoroscopeUpdate');
+            const today = new Date().toDateString();
+            
+            if (lastUpdate !== today) {
+                // Here you would typically fetch new horoscopes from an API
+                // For now, we'll just update the date
+                localStorage.setItem('lastHoroscopeUpdate', today);
+                
+                // If there's a saved sign, update its horoscope
+                const savedSign = localStorage.getItem('preferredZodiacSign');
+                if (savedSign) {
+                    updateHoroscope(savedSign);
+                }
+            }
+        }
+
+        // Check for daily updates when the page loads
+        checkDailyUpdate();
+    </script>
+</body>
+</html> 

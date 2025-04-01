@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Hardioscope</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Your Profile</h1>
+        <p>Manage Your Astrological Journey</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="horoscope.html">Daily Horoscope</a></li>
+                <li><a href="zodiac.html">Zodiac Signs</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="signin.html">Sign-in</a></li>
+            </ul>
+            <div class="nav-profile">
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="first">
+            <div>
+                <div class="heading">Your Profile Information</div>
+                <div class="profile-container">
+                    <div class="profile-section">
+                        <h3>Personal Information</h3>
+                        <div class="profile-info">
+                            <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+                            <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+                            <p><strong>Birth Date:</strong> <span id="userBirthDate">Loading...</span></p>
+                            <p><strong>Zodiac Sign:</strong> <span id="userZodiac">Loading...</span></p>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Saved Readings</h3>
+                        <div class="saved-readings">
+                            <div class="reading-card">
+                                <h4>Daily Horoscope</h4>
+                                <p id="dailyHoroscope">Loading...</p>
+                            </div>
+                            <div class="reading-card">
+                                <h4>Birth Chart</h4>
+                                <p id="birthChart">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="button-learn" onclick="editProfile()">Edit Profile</button>
+                    <button class="button-learn" onclick="changePassword()">Change Password</button>
+                    <button class="button-learn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Celestial Insights. All rights reserved.</p>
+            <p>
+                <a href="privacy.html" style="color: white; text-decoration: none">Privacy Policy</a>
+                |
+                <a href="terms.html" style="color: white; text-decoration: none">Terms of Service</a>
+                |
+                <a href="contact.html" style="color: white; text-decoration: none">Contact Us</a>
+                |
+                <a href="about.html" style="color: white; text-decoration: none">About Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is logged in
+        function checkLogin() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                window.location.href = 'signin.html';
+                return;
+            }
+            return JSON.parse(userData);
+        }
+
+        // Load user data
+        function loadUserData() {
+            const userData = checkLogin();
+            if (userData) {
+                document.getElementById('userName').textContent = userData.name;
+                document.getElementById('userEmail').textContent = userData.email;
+                document.getElementById('userBirthDate').textContent = userData.birthDate;
+                document.getElementById('userZodiac').textContent = userData.zodiacSign;
+                
+                // Load saved readings
+                const savedReadings = localStorage.getItem('savedReadings');
+                if (savedReadings) {
+                    const readings = JSON.parse(savedReadings);
+                    document.getElementById('dailyHoroscope').textContent = readings.dailyHoroscope || 'No saved horoscope';
+                    document.getElementById('birthChart').textContent = readings.birthChart || 'No saved birth chart';
+                }
+            }
+        }
+
+        // Profile actions
+        function editProfile() {
+            // Implement edit profile functionality
+            alert('Edit profile feature coming soon!');
+        }
+
+        function changePassword() {
+            // Implement change password functionality
+            alert('Change password feature coming soon!');
+        }
+
+        function logout() {
+            localStorage.removeItem('userData');
+            window.location.href = 'signin.html';
+        }
+
+        // Load data when page loads
+        window.onload = loadUserData;
+    </script>
+</body>
+</html> 
